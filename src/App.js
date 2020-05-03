@@ -12,7 +12,7 @@ function App() {
    * Perform GET request to API endpoint for UK data on recovered cases.
    *
    */
-  async function getData(){
+  async function checkDb(){
     
     const db = await getDb();
 
@@ -26,7 +26,7 @@ function App() {
 
     if(foundEntry === undefined){
       fetchData(db);
-    } else if(foundEntry.Date.getDate() !== new Date().getDate() - 1){
+    } else if(foundEntry.Date.getDate() !== new Date().getDate()-1){
       // Delete case entry
       (await getDb()).delete('cases', 0);
 
@@ -35,6 +35,7 @@ function App() {
   }
 
   function fetchData(db){
+    console.log("new data")
     axios.get('https://api.covid19api.com/total/country/united-kingdom/status/recovered').then(async (res)=>{
 
       // Get latest entry.
@@ -73,14 +74,6 @@ function App() {
             }
         }
     });
-  }
-
-  async function checkDb(){
-    const db = await getDb();
-    let dbIsValid = false;
-    db.getAllFromIndex('cases').then(res=>console.log(res)).catch((err)=>dbIsValid=false);
-
-    if(!dbIsValid) getData();
   }
 
   useEffect(()=>{
