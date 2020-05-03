@@ -1,42 +1,61 @@
+/* questrial-regular - latin */
+@font-face {
+  font-family: "Questrial";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Questrial"), local("Questrial-Regular"), url("/fonts/questrial-regular.woff2") format("woff2");
+}
+a {
+  color: inherit;
+}
+
 body {
-  background-color: #e3d6d0;
-}
-
-.App {
+  background-color: #ebe9f5;
+  font-family: "Questrial", sans-serif;
   text-align: center;
+  font-size: 2em;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Canvas {
+  position: fixed !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.update {
+  background: #fff;
+  border-radius: 1.25em 1.25em 0 0;
+  position: fixed;
+  height: calc(30% - 1em);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 600px;
+  padding: 0.5em 0;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+}
+.update__cases {
+  font-size: 1.6em;
+  margin: 0;
+}
+.update__subtitle {
+  font-size: 0.7em;
+  margin: 0.25em 0;
+}
+.update__source {
+  color: grey;
+  font-size: 0.45em;
+  margin: 0;
+  margin-top: 0.5em;
+  font-weight: 600;
+}
+.update__author {
+  color: grey;
+  font-size: 0.4em;
+  margin-top: 2em;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*# sourceMappingURL=app.css.map */

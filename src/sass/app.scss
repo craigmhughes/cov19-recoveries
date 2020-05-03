@@ -1,0 +1,66 @@
+/* questrial-regular - latin */
+@font-face {
+    font-family: 'Questrial';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Questrial'), local('Questrial-Regular'),
+         url('/fonts/questrial-regular.woff2') format('woff2'), /* Super Modern Browsers */
+}
+
+a {
+    color: inherit;
+}
+
+body {
+    background-color: #ebe9f5;
+    font-family: 'Questrial', sans-serif;
+    text-align: center;
+    font-size: 2em;
+}
+
+.Canvas {
+    position: fixed!important;
+}
+
+.update {
+    background: #fff;
+    border-radius: 1.25em 1.25em 0 0;
+    position: fixed;
+    height: calc(30% - 1em);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5em 0;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__cases {
+        font-size: 1.6em;
+        margin: 0;
+    }
+
+    &__subtitle {
+        font-size: 0.7em;
+        margin: 0.25em 0;
+    }
+
+    &__source {
+        color: grey;
+        font-size: 0.45em;
+        margin: 0;
+        margin-top: 0.5em;
+        font-weight: 600;
+    }
+
+    &__author {
+        color: grey;
+        font-size: 0.4em;
+        margin-top: 2em;
+    }
+}

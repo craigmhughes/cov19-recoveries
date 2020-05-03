@@ -9,12 +9,12 @@ const Heart = ({url, color})=>{
        
     useMemo(() => new OBJLoader().load(url, (obj)=>{
         obj.traverse((child)=>{
-            if (child.isMesh) child.material = newMaterial;
+            if (child.isMesh) child.material = new THREE.MeshPhongMaterial({color: color});
             if ( child instanceof THREE.Mesh ) { child.castShadow = true; }
         });
 
         setModel(obj);
-    }), [url]);
+    }), [url, color]);
 
     return model ? <primitive object={model} /> : null;
 }

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
-import React, { useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Canvas, useThree } from 'react-three-fiber'
-import { useSpring, animated } from 'react-spring/three'
+import { useSpring, a } from 'react-spring/three'
 
 import Heart from './heart.js';
 
@@ -19,13 +19,29 @@ const Camera = () => {
 };
 
 
-export default function RenderCanvas(){
+export default function RenderCanvas({rate}){
 
-    const [props, set] = useSpring(() => ({
-        scale: [0.1, 0.1, 0.1],
-        rotation: [4.75, 0, 0],
-        position: [0,-1,-2]
-    }));
+    const [pulse, setPulse] = useState(true);
+    const [nhs, setnhs] = useState(false);
+
+    const props = useSpring({
+        scale: !rate ? [0, 0, 0] : pulse ? [0.1, 0.1, 0.1] : [0.12,0.12,0.12],
+        rotation: [4.8, 0, 0],
+        position: [0,!rate ? -1 : -0.25 ,-2],
+        config: {mass:2, tension:50, friction:25, clamp: true}
+    });
+
+
+    useEffect(() => {
+        let beatInterval = Number(((86400 / rate) * 1000).toString().split(".")[0].substr(0,6));
+        console.log(beatInterval);
+        if(!isNaN(beatInterval)){
+            const interval = setInterval(() => {
+                setPulse(!pulse);
+            }, beatInterval);
+            return () => clearInterval(interval);
+        }
+    }, [pulse, rate]);
     
 
     return(
@@ -35,9 +51,10 @@ export default function RenderCanvas(){
             <ambientLight intensity={0.5} />
             <spotLight intensity={0.85} position={[20, 5, 10]} angle={0.2} penumbra={1} castShadow />
 
-            <animated.mesh {...props}>
-                <Heart url="heart.obj" color="#ff6861"/>
-            </animated.mesh>
+            <a.mesh
+            {...props}>
+                <Heart attach="geometry" url="heart.obj" color={nhs ? "blue" : "red"}/>
+            </a.mesh>
             
         </Canvas>
     );
