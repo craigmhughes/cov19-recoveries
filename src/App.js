@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { openDB, deleteDB, wrap, unwrap } from 'idb';
 
+
 import './App.css';
+import RenderCanvas from './components/RenderCanvas.js';
+
 
 function App() {
   const axios = require('axios').default;
@@ -84,7 +87,7 @@ function App() {
 
   return (
     <div className="App">
-      
+      <RenderCanvas/>
     </div>
   );
 }
