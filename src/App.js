@@ -31,9 +31,13 @@ function App() {
     }).catch((err)=>{
     });
 
-    if(foundEntry === undefined){
+    // Get time data was last pulled from API.
+    let lastChecked = localStorage.getItem("lastChecked");
+
+    if(foundEntry === undefined || lastChecked === null){
       fetchData(db);
-    } else if(foundEntry.Date.getDate() !== new Date().getDate()-1){
+    } else if(new Date(Number(lastChecked)).getDate() !== new Date(Date.now()).getDate()){
+
       // Delete case entry
       (await getDb()).delete('cases', 0);
 
@@ -57,16 +61,14 @@ function App() {
         Date: new Date(latest.Date)
       };
 
-      console.log(latest);
-
       for(let i = res.data.length; i > 0; i--){
         let temp = res.data[i-1];
-        console.log(temp);
 
         latest.Cases += temp.Recovered;
       }
 
       db.add('cases', latest).catch(()=>{});
+      localStorage.setItem("lastChecked", JSON.stringify(Date.now()));
       setData(latest);
       
     }).catch(err=>console.error(err));

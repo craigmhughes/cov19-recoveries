@@ -34,7 +34,7 @@ export default function RenderCanvas({rate}){
 
     useEffect(() => {
         let beatInterval = Number(((86400 / rate) * 1000).toString().split(".")[0].substr(0,6));
-        console.log(beatInterval);
+        
         if(!isNaN(beatInterval)){
             const interval = setInterval(() => {
                 setPulse(!pulse);

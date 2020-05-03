@@ -6,12 +6,15 @@ let cacheName = "v1";
 let filesToCache = [
     "/",
     "/manifest.json",
-    "/css/app.css",
-    "/js/app.js",
+    "/static/css/app.css",
+    "/static/js/app.js",
     // Fonts
     "/fonts/questrial-regular.woff2",
     // Models
-    "/heart.obj"
+    "/heart.obj",
+    // Icons
+    "/heart-192.png",
+    "/heart-192-ico.png",
 ];
 
 // On installing the service worker.
@@ -44,34 +47,24 @@ self.addEventListener("activate", e => {
 });
 
 // Keywords to cache
-const assetsToCache = ["fonts", "images", "icons"];
-
-// Do not cache responses from these paths.
-const ignoredReferrers = ["login", "register"]
+const assetsToCache = ["js", "css"];
 
 
 // Listen for fetch requests.
 self.addEventListener("fetch", e => {
     // Loop over Keywords to cache assets which match.
-    for(asset of assetsToCache){
+    for(let asset of assetsToCache){
+        console.log(e.request.url);
+        console.log(e.request.url.includes(asset));
         if(e.request.url.includes(asset)){
             return e.respondWith(
                 caches.match(e.request).then(res=>{
-                    
-                    let referrerPath = e.request.referrer.replace("https://","").replace("http://","").split(/\/(.+)/)[1];
-                    let requestPath = e.request.url.replace("https://","").replace("http://","").split(/\/(.+)/)[1];
-
                     return res || caches.open(cacheName).then((cache)=>{
                         // Carry out fetch request and cache response.
                         return fetch(e.request).then(resp => {
 
-                            console.log(referrerPath);
-                            console.log(requestPath);
-
-                            // If referrer is not from an online only page, cache the response.
-                            if(!ignoredReferrers.includes(referrerPath) && referrerPath !== undefined && !filesToCache.includes(requestPath)){
-                                cache.put(e.request, resp.clone());
-                            }
+                            cache.put(e.request, resp.clone());
+                            
                             return resp;
 
                         }).catch(err=>{

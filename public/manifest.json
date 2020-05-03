@@ -4,12 +4,12 @@
   "author":"Craig Hughes",
   "icons": [
     {
-      "src": "heart-192.png",
+      "src": "heart-192-ico.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "heart-192.png",
+      "src": "heart-192-ico.png",
       "type": "image/png",
       "sizes": "192x192"
     },
