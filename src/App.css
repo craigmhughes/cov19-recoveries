@@ -32,7 +32,7 @@ body {
   max-width: 600px;
   padding: 0.5em 0;
   margin: 0 auto;
-  min-height: 250px;
+  min-height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,6 +45,7 @@ body {
 .update__cases {
   font-size: 1.6em;
   margin: 0;
+  margin-top: 0.5em;
 }
 .update__subtitle {
   font-size: 0.7em;

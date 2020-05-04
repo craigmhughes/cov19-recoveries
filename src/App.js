@@ -121,7 +121,7 @@ function App() {
         <p className="update__subtitle">Recovered UK cases (COVID-19)</p>
         <p className="update__source">Source <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></p>
 
-        <p className="update__author">Made by: <a href="https://github.com/craigmhughes">Craig Hughes</a></p>
+        <p className="update__author">Made by: <a href="https://github.com/craigmhughes">@craigmhughes</a></p>
       </section>}
     </main>
   );
