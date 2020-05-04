@@ -9,6 +9,8 @@ import RenderCanvas from './components/RenderCanvas.js';
 function App() {
   const axios = require('axios').default;
 
+  const [nhs, setNhs] = useState(new Date().getDay() === 4 && new Date().getHours() === 20);
+
   const [data, setData] = useState({
     id: 0,
     Cases: 0,
@@ -105,14 +107,22 @@ function App() {
 
   return (
     <main className="App">
-      <RenderCanvas rate={data.Cases}/>
+      <RenderCanvas rate={data.Cases} nhs={nhs}/>
+      {nhs ?
+      <section className="update">
+        <p className="update__cases">Thank you</p>
+        <p className="update__subtitle">{data.Cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Recovered UK cases (COVID-19)</p>
+        <p className="update__source">Source <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></p>
+        <p className="update__author"><a href="https://www.justgiving.com/associationofnhscharities">#ClapForOurCarers</a></p>
+      </section>
+      :
       <section className="update">
         <p className="update__cases">{data.Cases.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
         <p className="update__subtitle">Recovered UK cases (COVID-19)</p>
         <p className="update__source">Source <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></p>
 
         <p className="update__author">Made by: <a href="https://github.com/craigmhughes">Craig Hughes</a></p>
-      </section>
+      </section>}
     </main>
   );
 }

@@ -19,10 +19,9 @@ const Camera = () => {
 };
 
 
-export default function RenderCanvas({rate}){
+export default function RenderCanvas({rate, nhs}){
 
     const [pulse, setPulse] = useState(true);
-    const [nhs, setnhs] = useState(false);
 
     const props = useSpring({
         scale: !rate ? [0, 0, 0] : pulse ? [0.1, 0.1, 0.1] : [0.12,0.12,0.12],
@@ -33,6 +32,7 @@ export default function RenderCanvas({rate}){
 
 
     useEffect(() => {
+        
         let beatInterval = Number(((86400 / rate) * 1000).toString().split(".")[0].substr(0,6));
 
         if(!isNaN(beatInterval)){

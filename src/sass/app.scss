@@ -34,11 +34,17 @@ body {
     max-width: 600px;
     padding: 0.5em 0;
     margin: 0 auto;
+    min-height: 250px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    & > p {
+        width: 80%;
+        max-width: 500px;
+    }
 
     &__cases {
         font-size: 1.6em;
