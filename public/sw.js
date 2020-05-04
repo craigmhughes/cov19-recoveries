@@ -54,24 +54,21 @@ const assetsToCache = ["js", "css"];
 self.addEventListener("fetch", e => {
     // Loop over Keywords to cache assets which match.
     for(let asset of assetsToCache){
-        console.log(e.request.url);
-        console.log(e.request.url.includes(asset));
+
         if(e.request.url.includes(asset)){
             return e.respondWith(
                 caches.match(e.request).then(res=>{
-                    return res || caches.open(cacheName).then((cache)=>{
+                    return caches.open(cacheName).then((cache)=>{
                         // Carry out fetch request and cache response.
                         return fetch(e.request).then(resp => {
-
                             cache.put(e.request, resp.clone());
-                            
                             return resp;
-
+                            
                         }).catch(err=>{
                             console.log(err);
                             return false;
                         });
-                    })
+                    }) || res;
                 })
                 
             );
@@ -83,7 +80,7 @@ self.addEventListener("fetch", e => {
         caches.match(e.request).then( res =>{
             // Uncomment and comment out the line below to block connections.
             // return res || false;
-            return res || fetch(e.request).catch(err=>{return false});
+            return fetch(e.request).catch(err=>{return res});
         })
     ); 
 });

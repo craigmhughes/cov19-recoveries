@@ -28,13 +28,13 @@ export default function RenderCanvas({rate}){
         scale: !rate ? [0, 0, 0] : pulse ? [0.1, 0.1, 0.1] : [0.12,0.12,0.12],
         rotation: [4.8, 0, 0],
         position: [0,!rate ? -1 : -0.25 ,-2],
-        config: {mass:2, tension:50, friction:25, clamp: true}
+        config: {mass:2, tension:25, friction:12, clamp: true}
     });
 
 
     useEffect(() => {
         let beatInterval = Number(((86400 / rate) * 1000).toString().split(".")[0].substr(0,6));
-        
+
         if(!isNaN(beatInterval)){
             const interval = setInterval(() => {
                 setPulse(!pulse);
